@@ -7,7 +7,8 @@ basic python plugin to get google maps information/api using Selenium and Chrome
 
 # TO-DO: 
 - [x] Add Initalization/Open google maps
-- [ ] Add Searching
+- [x] Add Searching
+- [ ] Add information from search results
 - [ ] Review and Review Searching
 - [ ] Closed, Address, Phone number and other information as configurations.
 - [ ] Directions (Car)
