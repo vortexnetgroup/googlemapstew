@@ -1,6 +1,8 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+import time
 
 def initialize_browser():
     """
@@ -35,3 +37,25 @@ def close_browser(driver):
     if driver:
         driver.quit()
         print("Browser closed.")
+
+def searchgmaps(driver, query):
+    """
+    Performs a search on Google Maps for a given query.
+    """
+    try:
+        # Wait for the search input field to be present using its 'name' attribute
+        search_input = driver.find_element(By.NAME, "q")
+        search_input.send_keys(query)
+        print(f"Typed '{query}' into the search box.")
+        time.sleep(2) # Give some time for suggestions to load, if any
+
+        # Find and click the search button
+        search_button = driver.find_element(By.CSS_SELECTOR, "button[aria-label='Search']")
+        search_button.click()
+        print("Clicked the search button.")
+        time.sleep(5) # Wait for search results to load
+
+    except Exception as e:
+        print(f"An error occurred during search: {e}")
+    finally:
+        close_browser(driver)
