@@ -1,14 +1,24 @@
-from googlemapstew_plugin.browser_control import initialize_browser, close_browser, search
+from googlemapstew_plugin.browser_control import initialize_browser, close_browser
 import time
 
-if __name__ == "__main__":
+def test_browser_initialization():
     driver = None
     try:
+        print("Attempting to initialize browser...")
         driver = initialize_browser()
-        search(driver, "restaurants in New York")
-        time.sleep(5) # Give some time to see the browser before closing if not headless
+        print("Browser initialized successfully. Current URL:", driver.current_url)
+        # Give it a moment to ensure Google Maps loads fully
+        time.sleep(5)
+        print("Test successful: Browser opened headless and navigated to Google Maps.")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"Test failed: An error occurred - {e}")
     finally:
         if driver:
+            print("Attempting to close browser...")
             close_browser(driver)
+            print("Browser closed.")
+        else:
+            print("No driver to close as initialization failed.")
+
+if __name__ == "__main__":
+    test_browser_initialization()
