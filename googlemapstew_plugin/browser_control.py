@@ -55,6 +55,15 @@ def searchgmaps(driver, query):
         print("Clicked the search button.")
         time.sleep(5) # Wait for search results to load
 
+        # Extract and print place names
+        place_name_elements = driver.find_elements(By.CSS_SELECTOR, 'div.Nv2PK.THOPZb.CpccDe div.qBF1Pd.fontHeadlineSmall ')
+        if place_name_elements:
+            print("\nFound places:")
+            for i, element in enumerate(place_name_elements):
+                print(f"{i+1}. {element.text}")
+        else:
+            print("\nNo places found on the page.")
+
     except Exception as e:
         print(f"An error occurred during search: {e}")
     finally:
