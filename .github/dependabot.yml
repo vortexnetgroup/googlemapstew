@@ -1,0 +1,10 @@
+# Dependabot configuration for version updates.
+# You can specify which package ecosystems to update and where the package manifests are located.
+# Documentation for all configuration options: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  - package-ecosystem: "pip"  # Use "pip" for Python package updates
+    directory: "/"  # Root directory of the repository where the requirements file is located (adjust this if it's different)
+    schedule:
+      interval: "weekly"  # Frequency of updates: can be "daily", "weekly", or "monthly"
