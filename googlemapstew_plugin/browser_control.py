@@ -38,9 +38,10 @@ def close_browser(driver):
         driver.quit()
         print("Browser closed.")
 
-def searchgmaps(driver, query):
+def perform_gmaps_search(driver, query):
     """
     Performs a search on Google Maps for a given query.
+    Returns True if search is successful, False otherwise.
     """
     try:
         # Wait for the search input field to be present using its 'name' attribute
@@ -54,17 +55,13 @@ def searchgmaps(driver, query):
         search_button.click()
         print("Clicked the search button.")
         time.sleep(5) # Wait for search results to load
-
-        # Extract and print place names
-        place_name_elements = driver.find_elements(By.CSS_SELECTOR, 'div.Nv2PK.THOPZb.CpccDe div.qBF1Pd.fontHeadlineSmall ')
-        if place_name_elements:
-            print("\nFound places:")
-            for i, element in enumerate(place_name_elements):
-                print(f"{i+1}. {element.text}")
-        else:
-            print("\nNo places found on the page.")
-
+        return True
     except Exception as e:
         print(f"An error occurred during search: {e}")
-    finally:
-        close_browser(driver)
+        return False
+
+def get_page_html(driver):
+    """
+    Returns the full HTML source of the current page.
+    """
+    return driver.page_source
